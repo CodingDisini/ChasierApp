@@ -1,11 +1,3 @@
-<?php
-        foreach($hasil as $data){
-            $id_brg[] = $data->id_brg;
-            $jml_jual[] = (float) $data->jml_jual;
-        }
-
-        print_r($data);die;
-    ?>
 
 <?php if ($this->session->flashdata('message')) { ?>
 <div class="alert alert-dismissible alert-light">
