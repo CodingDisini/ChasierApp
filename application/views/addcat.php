@@ -44,7 +44,7 @@
 				<a href="<?=base_url('editcat/'.$r->id_kategori);?>" title="Edit"><i class="fa fa-pencil-square-o"></i></a> &nbsp;
 				<a href="<?=base_url('delcat/'.$r->id_kategori);?>" title="Hapus"><i class="fa fa-trash-o"></i></a>
 				<?php } else { ?>
-				<span class="label label-danger">Disabled</span>
+				<span class="label">Disabled</span>
 				<?php } ?>
 			</td>
 		</tr>

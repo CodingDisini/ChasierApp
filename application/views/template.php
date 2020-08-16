@@ -72,7 +72,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <li><a href="<?=base_url('bersihkan');?>">Bersihkan</a></li>
               </ul>
             </li>
-            <li><a href="<?=base_url();?>page/lihat_laporan/<?php $time = mktime(0, 0, 0, date('m')-1, date('d'), date('Y')); echo date('Y-m-d', $time);?>/<?=date('Y-m-d');?>/"><i class="fa fa-area-chart"></i> Laporan</a></li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-area-chart"></i> Laporan <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="<?=base_url();?>page/lihat_laporan/<?php $time = mktime(0, 0, 0, date('m')-1, date('d'), date('Y')); echo date('Y-m-d', $time);?>/<?=date('Y-m-d');?>/">Data Transaksi</a></li>
+                <li><a href="<?=base_url('aplikasi');?>">Data Barang</a></li>
+                <li><a href="<?=base_url('bersihkan');?>">Data Penjualan</a></li>
+                <li><a href="<?=base_url('bersihkan');?>">Data Pembelian</a></li>
+              </ul>
+            </li>
+
+          
           </ul>
           <form class="navbar-form navbar-right" role="search" action="<?=base_url('page/search');?>" method="GET">
             <div class="form-group">

@@ -567,4 +567,5 @@ class Stok_model extends CI_Model {
         }
     }
 
+
 }

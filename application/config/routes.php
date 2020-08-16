@@ -110,3 +110,5 @@ $route['updatecat'] 			= 'page/updatecat';
 $route['delete'] 				= 'page/delete';
 $route['reset'] 				= 'page/reset';
 $route['logout'] 				= 'page/logout';
+
+$route['importbarang'] 			= 'page/saveimport';
