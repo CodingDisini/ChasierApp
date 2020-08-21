@@ -1,6 +1,4 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -21,8 +19,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link rel="stylesheet" href="<?=base_url('asset/dist/css/AdminLTE.min.css')?>">
 
 
-    <script src="<?=base_url('assets/gijgo/js/gijgo.min.js');?>" type="text/javascript"></script>
-
+    <!-- <script src="<?=base_url('assets/gijgo/js/gijgo.min.js');?>" type="text/javascript"></script> -->
+     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="<?=base_url('assets/jquery/jquery-3.2.1.js');?>"></script>
     <script src="<?=base_url('assets/jquery/jquery-3.2.1.min.js');?>"></script>
 </head>
@@ -77,8 +75,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-area-chart"></i> Laporan <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="<?=base_url();?>page/lihat_laporan/<?php $time = mktime(0, 0, 0, date('m')-1, date('d'), date('Y')); echo date('Y-m-d', $time);?>/<?=date('Y-m-d');?>/">Data Transaksi</a></li>
-                <li><a href="<?=base_url('aplikasi');?>">Data Barang</a></li>
-                <li><a href="<?=base_url('bersihkan');?>">Data Penjualan</a></li>
+                <li><a href="<?=base_url('stock_in');?>">Data Stok In</a></li>
+                <li><a href="<?=base_url('stock_out');?>">Data Stock Out</a></li>
                 <li><a href="<?=base_url('bersihkan');?>">Data Pembelian</a></li>
               </ul>
             </li>
@@ -258,5 +256,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     })
   })
 </script>
+
+
 </body>
 </html>

@@ -1,4 +1,6 @@
 <h4><strong>Tabel Barang</strong>
+	<a href="<?=base_url('printbarang');?>" class="btn btn-flat btn-danger"><i
+                    class="fa fa-print"></i> Cetak PDF</a>
 	<?php if ($this->session->userdata('akses') == 1) { ?> <a href="<?=base_url('add');?>" title="Tambah Barang"><i class="fa fa-plus-circle"></i></a><?php } ?></h4>
 <div class="box box-info">
     <div class="box box-widget">

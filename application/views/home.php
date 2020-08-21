@@ -1,4 +1,5 @@
 
+
 <?php if ($this->session->flashdata('message')) { ?>
 <div class="alert alert-dismissible alert-light">
 	<button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -103,7 +104,8 @@
                   
                   <br><br>
                   <div class="chart">
-                      <canvas id="canvas"></canvas>
+                      <canvas id="myChart"></canvas>
+                      
                   </div>
                   <!-- /.chart-responsive -->
                 </div>
@@ -170,47 +172,7 @@
               <!-- /.row -->
             </div>
             <!-- ./box-body -->
-            <div class="box-footer">
-              <div class="row">
-                <div class="col-sm-3 col-xs-6">
-                  <div class="description-block border-right">
-                    <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 17%</span>
-                    <h5 class="description-header">$35,210.43</h5>
-                    <span class="description-text">TOTAL REVENUE</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-3 col-xs-6">
-                  <div class="description-block border-right">
-                    <span class="description-percentage text-yellow"><i class="fa fa-caret-left"></i> 0%</span>
-                    <h5 class="description-header">$10,390.90</h5>
-                    <span class="description-text">TOTAL COST</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-3 col-xs-6">
-                  <div class="description-block border-right">
-                    <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 20%</span>
-                    <h5 class="description-header">$24,813.53</h5>
-                    <span class="description-text">TOTAL PROFIT</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-3 col-xs-6">
-                  <div class="description-block">
-                    <span class="description-percentage text-red"><i class="fa fa-caret-down"></i> 18%</span>
-                    <h5 class="description-header">1200</h5>
-                    <span class="description-text">GOAL COMPLETIONS</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-              </div>
-              <!-- /.row -->
-            </div>
-            <!-- /.box-footer -->
+            
           </div>
           <!-- /.box -->
             </div>
@@ -338,28 +300,37 @@
 			</div>
 		</div>
 		<?php } ?>
- <!--Load chart js-->
-   <script src="<?=base_url('asset/bower_components/chart.js/Chart.js')?>"></script>
-    <script>
- 
-            var lineChartData = {
-                labels : <?php echo json_encode($id_brg);?>,
-                datasets : [
-                     
-                    {
-                        fillColor: "rgba(60,141,188,0.9)",
-                        strokeColor: "rgba(60,141,188,0.8)",
-                        pointColor: "#3b8bba",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(152,235,239,1)",
-                        data : <?php echo json_encode($jml_jual);?>
-                    }
- 
-                ]
-                 
+
+ <script type="text/javascript">
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [
+          <?php
+            if (count($graph)>0) {
+              foreach ($graph as $data) {
+                echo "'" .$data->nama_barang ."',";
+              }
             }
+          ?>
+        ],
+        datasets: [{
+            label: 'Grafik Transaksi',
+            backgroundColor: '#156EA4',
+            borderColor: '#156EA4',
+            data: [
+              <?php
+                if (count($graph)>0) {
+                   foreach ($graph as $data) {
+                    echo $data->jml_jual . ", ";
+                  }
+                }
+              ?>
+            ]
+        }]
+
+    },
+});
  
-        var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData);
-         
-    </script>
+  </script>

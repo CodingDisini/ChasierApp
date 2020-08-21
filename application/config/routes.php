@@ -111,4 +111,6 @@ $route['delete'] 				= 'page/delete';
 $route['reset'] 				= 'page/reset';
 $route['logout'] 				= 'page/logout';
 
-$route['importbarang'] 			= 'page/saveimport';
+$route['printbarang'] 			= 'page/printbarang';
+$route['stock_in'] 				= 'page/barang_masuk';
+$route['stock_out'] 			= 'page/barang_keluar';

@@ -80,7 +80,7 @@ class Page extends CI_Controller {
 	function home()
 	{
 
-		$data['hasil']=$this->stok_model->chart();
+
 		if ($this->session->userdata('akses')) {
 			error_reporting(0);
 	    	$total = $this->stok_model->total();
@@ -100,6 +100,7 @@ class Page extends CI_Controller {
                 'kasir_total_wdisc' => $this->stok_model->kasir_total_wdisc()->row()->total,
                 'total_ndisc'       => $this->stok_model->total_ndisc()->row()->grand_total,
                 'total_wdisc'       => $this->stok_model->total_wdisc()->row()->total,
+                'graph'				=> $this->stok_model->graph()->result(),
                 'total_pj_modal'    => $pj,
                 'sum_minus'         => $this->stok_model->sum_minus(),
                 'sum_pj_barang'		=> $this->stok_model->sum_pj_barang(),
@@ -1020,5 +1021,45 @@ class Page extends CI_Controller {
 		redirect(base_url());
 	}
 
+	function printbarang(){
+        $pdf = new FPDF('l','mm','A5');
+        // membuat halaman baru
+        $pdf->AddPage();
+        // setting jenis font yang akan digunakan
+        $pdf->SetFont('Arial','B',16);
+        // mencetak string 
+        $pdf->Cell(190,7,'DATA BARANG',0,1,'C');
+        /*$pdf->SetFont('Arial','B',12);
+        $pdf->Cell(190,7,'DAFTAR SISWA KELAS IX JURUSAN REKAYASA PERANGKAT LUNAK',0,1,'C');*/
+        // Memberikan space kebawah agar tidak terlalu rapat
+        $pdf->Cell(10,7,'',0,1);
+        $pdf->SetFont('Arial','B',10);
+        $pdf->Cell(10,6,'NO',1,0);
+        $pdf->Cell(40,6,'KODE BARANG',1,0);
+        $pdf->Cell(85,6,'NAMA BARANG',1,0);
+        $pdf->Cell(27,6,'HARGA BELI',1,0);
+        $pdf->Cell(25,6,'HARGA JUAL',1,1);
+        $pdf->SetFont('Arial','',10);
+        $brg = 
+        $this->stok_model->print_barang()->result();
+        $no = 1;
+        foreach ($brg as $row){
+        	$pdf->Cell(10,6,$no++,1,0);
+            $pdf->Cell(40,6,$row->kode_barang,1,0);
+            $pdf->Cell(85,6,$row->nama_barang,1,0);
+            $pdf->Cell(27,6,$row->harga_beli,1,0);
+            $pdf->Cell(25,6,$row->harga_jual,1,1); 
+        }
+        $pdf->Output();
+    }
 	
+	function barang_masuk(){
+  	$data['row'] = $this->stok_model->brg_masuk()->result();
+ 	$this->fungsi->template('barang_masuk', $data);
+	 }
+
+	 function barang_keluar(){
+  	$data['row'] = $this->stok_model->brg_keluar()->result();
+ 	$this->fungsi->template('barang_keluar', $data);
+	 }
 }

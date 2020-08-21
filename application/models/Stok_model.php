@@ -567,5 +567,49 @@ class Stok_model extends CI_Model {
         }
     }
 
+      function brg_masuk()
+    {
+        $this->db->select('barang_master.id_bmaster, barang.nama_barang, stok, tipe,tglup, barang.id_barang');
+        $this->db->from('barang_master');
+        $this->db->join('barang', 'barang_master.id_br = barang.id_barang');
+        $this->db->where('tipe','masuk');
+        $this->db->order_by('id_bmaster','desc');
+        $query = $this->db->get();
+        return $query;
+    }
 
-}
+   function brg_keluar()
+    {
+        $this->db->select('barang_master.id_bmaster, barang.nama_barang, stok, tipe,tglup, barang.id_barang');
+        $this->db->from('barang_master');
+        $this->db->join('barang', 'barang_master.id_br = barang.id_barang');
+        $this->db->where('tipe','keluar');
+        $this->db->order_by('id_bmaster','desc');
+        $query = $this->db->get();
+        return $query;
+    }
+
+    public function graph()
+    {
+      $this->db->select('*');
+      $this->db->from('penjualan');
+      $this->db->join('barang','barang.id_barang = penjualan.id_brg');
+      $this->db->join('penjualan_master','penjualan_master.id_pjmaster = penjualan.id_master');
+
+      $data = $this->db->get();
+      return $data;
+
+    }
+
+    public function print_barang()
+    {
+      $this->db->select('*');
+      $this->db->from('barang_master');
+      $this->db->join('barang','barang.id_barang = barang_master.id_br');
+
+      $data = $this->db->get();
+      return $data;
+
+    }
+
+} 
